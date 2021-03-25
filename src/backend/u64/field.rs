@@ -18,8 +18,6 @@ use core::ops::{Index, IndexMut};
 
 use subtle::{Choice, ConditionallyNegatable, ConditionallySelectable, ConstantTimeEq};
 
-use num::Integer;
-
 use crate::backend::u64::constants;
 use crate::scalar::Ristretto255Scalar;
 use crate::traits::ops::*;
@@ -648,16 +646,16 @@ impl FieldElement {
 
         let mut res = FieldElement::zero();
         match exp {
-            0...51 => {
+            0..=51 => {
                 res[0] = 1u64 << exp;
             }
-            52...103 => {
+            52..=103 => {
                 res[1] = 1u64 << (exp - 52);
             }
-            104...155 => {
+            104..=155 => {
                 res[2] = 1u64 << (exp - 104);
             }
-            156...207 => {
+            156..=207 => {
                 res[3] = 1u64 << (exp - 156);
             }
             _ => {
@@ -720,16 +718,16 @@ impl FieldElement {
 
         let mut res = FieldElement::zero();
         match exp {
-            0...51 => {
+            0..=51 => {
                 res[0] = 1u64 << exp;
             }
-            52...103 => {
+            52..=103 => {
                 res[1] = 1u64 << (exp - 52);
             }
-            104...155 => {
+            104..=155 => {
                 res[2] = 1u64 << (exp - 104);
             }
-            156...207 => {
+            156..=207 => {
                 res[3] = 1u64 << (exp - 156);
             }
             _ => {
@@ -828,6 +826,7 @@ impl FieldElement {
     }
 
     /// Takes a FieldElement out of Montgomery form, i.e. computes `a/R (mod l)`
+    #[allow(dead_code)]
     pub(self) fn from_montgomery(&self) -> FieldElement {
         let mut limbs = [0u128; 9];
         for i in 0..5 {

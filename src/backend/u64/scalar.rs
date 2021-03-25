@@ -19,8 +19,6 @@ use crate::backend::u64::constants;
 use crate::traits::ops::*;
 use crate::traits::Identity;
 
-use subtle::ConstantTimeEq;
-
 
 /// The `Scalar` struct represents an Scalar over the modulo
 /// `2^249 + 14490550575682688738086195780655237219` as 5 52-bit limbs
